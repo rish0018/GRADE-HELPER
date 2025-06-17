@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>VIT-AP Grade Predictor</title>
+    <link rel="stylesheet" href="vitapgradecalc.css" />
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>VIT-AP Grade Predictor</h1>
+            <p>Calculate how many marks you need in FAT to achieve your desired grade</p>
+        </header>
+
+        <div class="card">
+            <div class="info-box">
+                <p><strong>How it works:</strong> Enter your marks and class averages, and we'll predict the FAT average score and calculate how many marks you need to achieve different grades.</p>
+                <p><strong>Grading System:</strong> S (top 5%), A (next 20%), B (next 20%), C (next 20%), D (next 15%), E (next 15%)</p>
+                <p><strong>Requirements:</strong> Minimum 40 marks in FAT and overall total percentage above 50% after combining Theory and Lab</p>
+            </div>
+
+            <div class="toggle-container">
+                <div class="toggle-option active" id="theory-lab-toggle">Theory + Lab</div>
+                <div class="toggle-option" id="theory-only-toggle">Theory Only</div>
+            </div>
+
+            <div class="form-section active" id="theory-lab-form">
+                <h3>Your Marks</h3>
+                <div class="form-row">
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="quiz1">Your Quiz 1 (out of 10)</label>
+                            <input type="number" id="quiz1" min="0" max="10" step="0.5" placeholder="Enter marks" />
+                        </div>
+                    </div>
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="avg-quiz1">Class Average Quiz 1</label>
+                            <input type="number" id="avg-quiz1" min="0" max="10" step="0.1" placeholder="Average marks" value="7.0" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="quiz2">Your Quiz 2 (out of 10)</label>
+                            <input type="number" id="quiz2" min="0" max="10" step="0.5" placeholder="Enter marks" />
+                        </div>
+                    </div>
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="avg-quiz2">Class Average Quiz 2</label>
+                            <input type="number" id="avg-quiz2" min="0" max="10" step="0.1" placeholder="Average marks" value="7.0" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="quiz3">Your Quiz 3 (out of 10)</label>
+                            <input type="number" id="quiz3" min="0" max="10" step="0.5" placeholder="Enter marks" />
+                        </div>
+                    </div>
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="avg-quiz3">Class Average Quiz 3</label>
+                            <input type="number" id="avg-quiz3" min="0" max="10" step="0.1" placeholder="Average marks" value="7.0" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="cat1">Your CAT 1 (out of 50)</label>
+                            <input type="number" id="cat1" min="0" max="50" step="0.5" placeholder="Enter marks" />
+                        </div>
+                    </div>
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="avg-cat1">Class Average CAT 1</label>
+                            <input type="number" id="avg-cat1" min="0" max="50" step="0.1" placeholder="Average marks" value="35.0" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="cat2">Your CAT 2 (out of 50)</label>
+                            <input type="number" id="cat2" min="0" max="50" step="0.5" placeholder="Enter marks" />
+                        </div>
+                    </div>
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="avg-cat2">Class Average CAT 2</label>
+                            <input type="number" id="avg-cat2" min="0" max="50" step="0.1" placeholder="Average marks" value="35.0" />
+                        </div>
+                    </div>
+                </div>
+
+                <h3>Lab Component (25% of total grade)</h3>
+                <div class="form-row">
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="lab">Your Lab Marks (out of 100)</label>
+                            <input type="number" id="lab" min="0" max="100" step="0.5" placeholder="Enter marks" />
+                        </div>
+                    </div>
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="avg-lab">Class Average Lab Marks</label>
+                            <input type="number" id="avg-lab" min="0" max="100" step="0.1" placeholder="Average marks" value="80.0" />
+                        </div>
+                    </div>
+                </div>
+
+                <button id="calculate-theory-lab">Calculate Required FAT Marks</button>
+            </div>
+
+            <div class="form-section" id="theory-only-form">
+                <h3>Your Marks (Theory Only Course)</h3>
+                <div class="form-row">
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="t-quiz1">Your Quiz 1 (out of 10)</label>
+                            <input type="number" id="t-quiz1" min="0" max="10" step="0.5" placeholder="Enter marks" />
+                        </div>
+                    </div>
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="t-avg-quiz1">Class Average Quiz 1</label>
+                            <input type="number" id="t-avg-quiz1" min="0" max="10" step="0.1" placeholder="Average marks" value="7.0" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="t-quiz2">Your Quiz 2 (out of 10)</label>
+                            <input type="number" id="t-quiz2" min="0" max="10" step="0.5" placeholder="Enter marks" />
+                        </div>
+                    </div>
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="t-avg-quiz2">Class Average Quiz 2</label>
+                            <input type="number" id="t-avg-quiz2" min="0" max="10" step="0.1" placeholder="Average marks" value="7.0" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="t-quiz3">Your Quiz 3 (out of 10)</label>
+                            <input type="number" id="t-quiz3" min="0" max="10" step="0.5" placeholder="Enter marks" />
+                        </div>
+                    </div>
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="t-avg-quiz3">Class Average Quiz 3</label>
+                            <input type="number" id="t-avg-quiz3" min="0" max="10" step="0.1" placeholder="Average marks" value="7.0" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="t-cat1">Your CAT 1 (out of 50)</label>
+                            <input type="number" id="t-cat1" min="0" max="50" step="0.5" placeholder="Enter marks" />
+                        </div>
+                    </div>
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="t-avg-cat1">Class Average CAT 1</label>
+                            <input type="number" id="t-avg-cat1" min="0" max="50" step="0.1" placeholder="Average marks" value="35.0" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="t-cat2">Your CAT 2 (out of 50)</label>
+                            <input type="number" id="t-cat2" min="0" max="50" step="0.5" placeholder="Enter marks" />
+                        </div>
+                    </div>
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="t-avg-cat2">Class Average CAT 2</label>
+                            <input type="number" id="t-avg-cat2" min="0" max="50" step="0.1" placeholder="Average marks" value="35.0" />
+                        </div>
+                    </div>
+                </div>
+
+                <button id="calculate-theory-only">Calculate Required FAT Marks</button>
+            </div>
+        </div>
+
+        <div class="result-container card" id="result-container">
+            <h2>Your Grade Prediction Results</h2>
+            <div id="summary-container"></div>
+
+            <div class="predicted-fat" id="predicted-fat-container">
+                <!-- Predicted FAT average will be shown here -->
+            </div>
+
+            <h3>Required FAT Marks for Each Grade</h3>
+            <table id="results-table">
+                <thead>
+                    <tr>
+                        <th>Grade</th>
+                        <th>Required FAT Marks</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="results-body">
+                    <!-- Results will be populated here -->
+                </tbody>
+            </table>
+
+            <div class="info-box" style="margin-top: 20px;">
+                <p><strong>Note:</strong> This prediction uses a standard deviation of 5% when calculating grade thresholds.</p>
+                <p>Remember that you need a minimum of 40 marks in FAT and an overall score of at least 50% to pass.</p>
+            </div>
+
+            <div id="debug-output" class="debug"></div>
+        </div>
+    </div>
+
+    <script src="vitapgradecalc.js"></script>
+</body>
+</html>
