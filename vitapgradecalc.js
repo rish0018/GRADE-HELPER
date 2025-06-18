@@ -51,7 +51,8 @@ function calculateDynamicGrades(inputs) {
         
         let status = 'Possible';
         let rangeLow = Math.max(40, Math.floor(requiredFatMark - 5));
-        let rangeHigh = Math.min(100, Math.ceil(required, requiredFatMark + 5));
+        let rangeHigh = Math.min(100, Math.ceil(requiredFatMark + 5));
+
 
         if (requiredFatMark < 40) {
             requiredFatMark = 40;
